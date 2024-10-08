@@ -1,3 +1,7 @@
+#! /bin/sh
+
+chmod 777 /vault/data
+
 # Init Vault
 vault operator init > generated_keys.out
 

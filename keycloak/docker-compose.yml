@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:16.4-alpine3.20
+    ports:
+      - 5431:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - keycloak_network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    command: start-dev # for production change to start and configure key/certificates
+    environment:
+      PROXY_ADDRESS_FORWARDING: "true"
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    ports:
+      - 8180:8080
+    restart: always
+    depends_on:
+      - postgres
+    networks:
+      - keycloak_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  keycloak_network:
+    driver: bridge

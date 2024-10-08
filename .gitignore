@@ -1,9 +1,1 @@
 .idea
-
-### hashicorp/vault data ###
-/hashicorp-vault/vault/*.out
-vault/file/
-vault/logs/
-
-### postgres data ###
-postgres/data/

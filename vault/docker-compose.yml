@@ -1,0 +1,33 @@
+services:
+  vault:
+    image: hashicorp/vault:1.17.6
+    ports:
+      - 8200:8200
+    volumes:
+      - data:/vault/data/:rw
+      - file:/vault/file/:rw
+      - logs:/vault/logs/:rw
+      - ./config:/vault/config
+      - ./initialize.sh:/vault/initialize.sh
+      - ./unseal.sh:/vault/unseal.sh
+    environment:
+      - VAULT_ADDR=http://0.0.0.0:8200
+      - VAULT_API_ADDR=http://0.0.0.0:8200
+      - VAULT_ADDRESS=http://0.0.0.0:8200
+    cap_add:
+      - IPC_LOCK
+    command: vault server -config=/vault/config/vault.hcl
+    networks:
+      - vault_network
+
+volumes:
+  data:
+    driver: local
+  file:
+    driver: local
+  logs:
+    driver: local
+
+networks:
+  vault_network:
+    driver: bridge
