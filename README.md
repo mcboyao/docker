@@ -3,6 +3,7 @@ Docker Compose for
 * Vault
 * Postgres
 * Keycloak
+* Redis 
 
 ## Usage
 
@@ -57,3 +58,8 @@ Unseal Vault (**These steps must be used in the succeeding run**)
 * Run `docker-compose up -d` to start the service in background
 * Access web console at http://localhost:8180/
 
+### _Redis_
+* Go to `./redis` directory
+* Modify `./redis/.env` file to desired redis password. Default: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+* Run `docker-compose up -d` to start the service in background
+* Access database using connection URL `redis://default:eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81@127.0.0.1:6379`  
