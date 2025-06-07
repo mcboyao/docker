@@ -4,6 +4,7 @@ Docker Compose for
 * Postgres
 * Keycloak
 * Redis 
+* Elastic - Elasticsearch, Kibana and Postgres Connector
 
 ## Usage
 
@@ -63,3 +64,12 @@ Unseal Vault (**These steps must be used in the succeeding run**)
 * Modify `./redis/.env` file to desired redis password. Default: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
 * Run `docker-compose up -d` to start the service in background
 * Access database using connection URL `redis://default:eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81@127.0.0.1:6379`  
+
+### _Elastic_
+* Go to `./elastic` directory
+* Modify `./elastic/.env` file to desired database name and credentials. Default:
+  * Database: `postgres`
+  * User: `postgres`
+  * Password: `postgres2024`
+* Run `docker-compose up -d` to start the service in background
+* Access Kibana at http://localhost:5601/

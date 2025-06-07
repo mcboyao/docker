@@ -1,0 +1,7 @@
+connectors:
+-
+  connector_id: "V-P3RJcBIRuAC945xIT4"
+  service_type: "postgresql"
+elasticsearch:
+  host: "http://elasticsearch:9200"
+  api_key: ""
