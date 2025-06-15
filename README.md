@@ -5,6 +5,7 @@ Docker Compose for
 * Keycloak
 * Redis 
 * Elastic - Elasticsearch, Kibana and Postgres Connector
+* Unleash
 
 ## Usage
 
@@ -73,3 +74,17 @@ Unseal Vault (**These steps must be used in the succeeding run**)
   * Password: `postgres2024`
 * Run `docker-compose up -d` to start the service in background
 * Access Kibana at http://localhost:5601/
+
+### _Unleash_
+
+Reference: https://github.com/Unleash/unleash/tree/main
+
+* Go to `./unleash` directory
+* Modify `./unleash/.env` file to desired database name and credentials and Unleash admin account. Default:
+  * Database: `unleash`
+  * User: `postgres`
+  * Password: `postgres2024`
+  * Unleash Admin: `admin`
+  * Unleash Admin Password: `unleash4all`
+* Run `docker-compose up -d` to start the service in background
+* Access Unleash Web at http://localhost:4242

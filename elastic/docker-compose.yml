@@ -21,6 +21,8 @@ services:
       - 5601:5601
     networks:
       - elastic
+    depends_on:
+      - elasticsearch
 
   postgres:
     image: postgres:16.4-alpine3.20
@@ -44,6 +46,10 @@ services:
     command: "/app/bin/elastic-ingest -c /config/postgres-connector-config.yml"
     networks:
       - elastic
+    depends_on:
+      - elasticsearch
+      - kibana
+      - postgres
 
 volumes:
   elastic:
